@@ -1,11 +1,61 @@
+
+// funcion para mostrar los productos con sus caracteristicas
+
 document.addEventListener("DOMContentLoaded", () => {
+
     const productosLista = document.getElementById("productos-lista")
+
+    if(productosLista) {
+        const productosLista = document.getElementById("productos-lista")
+
+    function mostrarProductos(productos) {
+        productosLista.innerHTML = ""
+    
+        productos.forEach(producto => {
+            const productoDiv = document.createElement("div")
+            productoDiv.classList.add("producto")
+    
+            const tituloProducto = document.createElement("h3")
+            tituloProducto.textContent = producto.titulo
+    
+            const imgProducto = document.createElement("img")
+            imgProducto.src = producto.imagen
+    
+            const descripcionPorducto = document.createElement("p")
+            descripcionPorducto.textContent = producto.descripcion
+    
+            const precioProducto = document.createElement("p")
+            precioProducto.textContent = `Precio: $${producto.precio}`
+    
+            const comprarButton = document.createElement("button")
+            comprarButton.textContent = "Comprar"
+            comprarButton.className= "comprar"
+            comprarButton.addEventListener("click", () => {
+                carrito.push({
+                    id: producto.id,
+                    imagen: producto.imagen,
+                    titulo : producto.titulo,
+                    precio : producto.precio
+                })
+            })
+            
+    
+            productoDiv.appendChild(tituloProducto)
+            productoDiv.appendChild(imgProducto)
+            productoDiv.appendChild(descripcionPorducto)
+            productoDiv.appendChild(precioProducto)
+            productoDiv.appendChild(comprarButton)
+    
+            productosLista.appendChild(productoDiv)
+    
+        });
+    }
 
     const productos = [
         {
         id: "bleach",
         titulo: "Bleach",
-        imagen: "../img/bleach1.webp",
+        imagen: "/img/bleach1.webp",
         descripcion: "La serie narra las aventuras de Ichigo Kurosaki, un adolescente que accidentalmente absorbe los poderes de una shinigami",
         precio: 5000
     },   
@@ -117,14 +167,14 @@ document.addEventListener("DOMContentLoaded", () => {
     {
         id: "oyasumi",
         titulo: "Oyasumi Punpun",
-        imagen: "../img/punpun1.jpeg",
+        imagen: "/img/punpun1.jpeg",
         descripcion:"La historia sigue a Onodera Punpun, un niño normal que debe hacer frente a sus amigos y familia disfuncional, su interés amoroso, su adolescencia en sentido contrario y su mente hiperactiva. A medida que la vida de Punpun se vuelve cada vez más caótica, comienza a tratar temas del existencialismo y nihilismo.",
         precio: 7000
     }, 
     {
         id: "tokyio",
         titulo: "Tokyo Revengers",
-        imagen: "../img/revengers1.jpg",
+        imagen: "/img/revengers1.jpg",
         descripcion:"Takemichi Hanagaki, un joven de 26 años sin grandes objetivos en su vida, descubre un día que su exnovia de la adolescencia, Hinata Tachibana, así como su hermano menor Naoto, son asesinados por la Tokyo Manji. Cuando Takemichi es empujado hacia las vías de un tren, viaja en el tiempo hasta hace exactamente 12 años, en 2005  creando una paradoja temporal en la que Naoto sobrevive y ahora es un detective. Naoto deduce que Takemichi puede viajar 12 años al pasado cuando se toman de la mano, y usando sus nuevos conocimientos, Takemichi decide cambiar el futuro para salvar la vida de Hinata y sus amigos.",
         precio: 5000
     }, 
@@ -143,94 +193,149 @@ document.addEventListener("DOMContentLoaded", () => {
         precio: 5000
     } 
     ]
-// funcion para mostrar los productos con sus caracteristicas
+
 
 let carrito = []
 
-function mostrarProductos(productos) {
-    productosLista.innerHTML = "";
-
-    productos.forEach(producto => {
-        const productoDiv = document.createElement("div");
-        productoDiv.classList.add("producto");
-
-        const tituloProducto = document.createElement("h3");
-        tituloProducto.textContent = producto.titulo;
-
-        const imgProducto = document.createElement("img")
-        imgProducto.src = producto.imagen
-
-        const descripcionPorducto = document.createElement("p")
-        descripcionPorducto.textContent = producto.descripcion
-
-        const precioProducto = document.createElement("p")
-        precioProducto.textContent = `Precio: $${producto.precio}`
-
-        const comprarButton = document.createElement("button")
-        comprarButton.textContent = "Comprar"
-        comprarButton.className= "comprar"
-        comprarButton.addEventListener("click", () => {
-            carrito.push({
-                id: producto.id,
-                imagen: producto.imagen,
-                titulo : producto.titulo,
-                precio : producto.precio
-            })
-            console.log(carrito)
-        })
-
-
-        productoDiv.appendChild(tituloProducto)
-        productoDiv.appendChild(imgProducto)
-        productoDiv.appendChild(descripcionPorducto)
-        productoDiv.appendChild(precioProducto)
-        productoDiv.appendChild(comprarButton)
-
-        productosLista.appendChild(productoDiv)
-
-    });
-}
- 
-    mostrarProductos(productos); 
+    mostrarProductos(productos)
 
     // Botón de ordenar de A a Z
     document.getElementById("ordenar-az").addEventListener("click", () => {
-        const productosOrdenados = [...productos].sort((a, b) => a.titulo.localeCompare(b.titulo));
-        mostrarProductos(productosOrdenados);
+        const productosOrdenados = [...productos].sort((a, b) => a.titulo.localeCompare(b.titulo))
+        mostrarProductos(productosOrdenados)
     });
 
     // Botón de ordenar de Z a A
     document.getElementById("ordenar-za").addEventListener("click", () => {
-        const productosOrdenados = [...productos].sort((a, b) => b.titulo.localeCompare(a.titulo));
-        mostrarProductos(productosOrdenados);
-    });
-
-    });
+        const productosOrdenados = [...productos].sort((a, b) => b.titulo.localeCompare(a.titulo))
+        mostrarProductos(productosOrdenados)
+    })}
+})
 
 /* no funciona, solo cambia el color de texto*/
 
-document.addEventListener("DOMContentLoaded", () => {
+if(body) {
+
     const modoOscuro = document.getElementById("modo-oscuro")
-    const body = document.body
 
     let modoOscuroOK = localStorage.getItem("modoOscuro") === "true"
 
     if (modoOscuroOK) {
         body.classList.add("modo-oscuro")
     }
+    
+    function alternarModo() {
 
-    function alternarModo () {
         modoOscuroOK = !modoOscuroOK
 
         localStorage.setItem("modoOscuro", modoOscuroOK)
 
-        if (modoOscuroOK) {
+        if(modoOscuroOK) {
             body.classList.add("modo-oscuro")
-        } else {
+        }else {
             body.classList.remove("modo-oscuro")
         }
     }
+    if (modoOscuro) {
+        modoOscuro.addEventListener("click", alternarModo)
+    }
+}
 
-    modoOscuro.addEventListener("click", alternarModo)
+// condiciones que debe cumplirse al completar el formulario
 
+const homePage = document.getElementById("formulario")
+if(homePage) { 
+
+function limpiarFormulario() {
+    document.getElementById("nombre").value = "" 
+    document.getElementById("email").value = "" 
+    document.getElementById("mensaje").value = ""
+    document.getElementById("mensajeError").style.display = "none"
+    document.getElementById("mensajeErrorNombre").style.display = "none"
+}
+
+
+function validarFormulario () {
+    const nombre = document.getElementById("nombre").value 
+    const email = document.getElementById("email").value
+    const mensaje = document.getElementById("mensaje").value
+    const mensajeError = document.getElementById("mensajeError")
+    const mensajeErrorNombre = document.getElementById("mensajeErrorNombre")
+
+
+    let formularioValido = true
+
+    if (nombre.length < 3) {
+        mensajeErrorNombre.style.display = "block"
+        formularioValido = false
+    } else {
+        mensajeErrorNombre.style.display = "none"
+    }
+
+    if (email.indexOf('@') === -1 || mensaje.length < 10) {
+        mensajeError.style.display = "block"
+        formularioValido = false
+    } else {
+        mensajeError.style.display = "none"
+    }
+
+    if (formularioValido) {
+        limpiarFormulario()
+    }
+
+    return formularioValido
+}
+
+// estructura del formulario
+
+document.addEventListener("DOMContentLoaded", function() {
+
+function crearFormulario () {
+
+    const formulario = document.getElementById("formulario")
+
+    const form = document.createElement("form")
+
+    const nombreLabel = document.createElement("label")
+    nombreLabel.innerHTML= "Nombre: "
+    form.appendChild(nombreLabel)
+
+    const nombreInput = document.createElement("input")
+    nombreInput.type = "text"
+    nombreInput.id = "nombre"
+    form.appendChild(nombreInput)
+
+    const emailLabel = document.createElement("label")
+    emailLabel.innerHTML = "Email: "
+    form.appendChild(emailLabel)
+
+    const emailInput = document.createElement("input")
+    emailInput.type = "email"
+    emailInput.id = "email"
+    form.appendChild(emailInput)
+
+    const mensajeLabel = document.createElement("label")
+    mensajeLabel.innerHTML = "Mensaje (más de 10 caracteres): "
+    form.appendChild(mensajeLabel)
+
+    const mensajeInput = document.createElement("textarea")
+    mensajeInput.id = "mensaje"
+    form.appendChild(mensajeInput)
+
+
+    const submitButton = document.createElement("input")
+    submitButton.type = "submit"
+    submitButton.value = "Enviar"
+    form.appendChild(submitButton)
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault()
+        validarFormulario()
+    })
+
+    formulario.appendChild(form)
+}
+
+    crearFormulario()
 })
+}
