@@ -241,7 +241,7 @@ if(body) {
     }
 }
 
-// condiciones que debe cumplirse al completar el formulario
+// condiciones que debe cumplirse al completar el formulario.
 
 const homePage = document.getElementById("formulario")
 if(homePage) { 
